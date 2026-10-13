@@ -1,0 +1,28 @@
+node_modules/
+dist/
+coverage/
+.env
+.env.*
+!.env.example
+*.log
+npm-debug.log*
+
+# Sensitive source data - never commit
+*.xls
+*.xlsx
+*.csv
+
+# Local databases and data exports
+*.db
+*.sqlite
+*.sqlite3
+*.sql
+
+# Private keys and certificates
+*.pem
+*.key
+
+# Local backups and archives
+*.tar
+*.tar.gz
+*.zip

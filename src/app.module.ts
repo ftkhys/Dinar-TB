@@ -1,0 +1,46 @@
+import { Module } from '@nestjs/common';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { AdherenceModule } from './adherence/adherence.module';
+import { ActivationModule } from './devices/activation.module';
+import { AuthModule } from './auth/auth.module';
+import { AuditModule } from './common/audit.module';
+import { ControlScheduleModule } from './control-schedule/control-schedule.module';
+import { FollowUpsModule } from './follow-ups/follow-ups.module';
+import { HealthModule } from './health/health.module';
+import { PatientsModule } from './patients/patients.module';
+import { TreatmentsModule } from './treatments/treatments.module';
+import { VisitsModule } from './visits/visits.module';
+
+@Module({
+  imports: [
+    ConfigModule.forRoot({ isGlobal: true }),
+    TypeOrmModule.forRootAsync({
+      inject: [ConfigService],
+      useFactory: (config: ConfigService) => ({
+        type: 'postgres' as const,
+        host: config.get<string>('DB_HOST', 'localhost'),
+        port: Number(config.get<string>('DB_PORT', '5432')),
+        username: config.get<string>('DB_USERNAME', 'postgres'),
+        password: config.get<string>('DB_PASSWORD', ''),
+        database: config.get<string>('DB_DATABASE', 'dinar_tb'),
+        ssl: config.get<string>('DB_SSL', 'false') === 'true',
+        autoLoadEntities: true,
+        synchronize: false,
+        migrations: ['dist/database/migrations/*.js'],
+        migrationsRun: false,
+      }),
+    }),
+    AuditModule,
+    AuthModule,
+    PatientsModule,
+    TreatmentsModule,
+    VisitsModule,
+    ControlScheduleModule,
+    FollowUpsModule,
+    AdherenceModule,
+    ActivationModule,
+    HealthModule,
+  ],
+})
+export class AppModule {}

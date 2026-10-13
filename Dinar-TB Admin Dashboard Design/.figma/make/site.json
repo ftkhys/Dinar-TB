@@ -1,0 +1,10 @@
+{
+  "description": "This health reminder app helps patients manage their tuberculosis medication schedules, providing timely notifications and tracking treatment progress.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
