@@ -104,7 +104,25 @@ describe("ControlApi", () => {
 
     await api.listControlSchedules("Budi Santoso");
 
-    expect(calls[0].url).toBe("/api/control-schedules?search=Budi%20Santoso");
+    const url = new URL(calls[0].url, "http://localhost");
+    expect(url.pathname).toBe("/api/control-schedules");
+    expect(url.searchParams.get("search")).toBe("Budi Santoso");
+    expect(url.searchParams.get("page")).toBe("1");
+    expect(url.searchParams.get("pageSize")).toBe("20");
+  });
+
+  it("passes pagination and status filters to the control schedule endpoint", async () => {
+    const calls = mockFetch({ body: [] });
+    const api = new ControlApi("token-123");
+
+    await api.listControlSchedules("Budi", 3, 10, "Terlambat");
+
+    const url = new URL(calls[0].url, "http://localhost");
+    expect(url.pathname).toBe("/api/control-schedules");
+    expect(url.searchParams.get("search")).toBe("Budi");
+    expect(url.searchParams.get("page")).toBe("3");
+    expect(url.searchParams.get("pageSize")).toBe("10");
+    expect(url.searchParams.get("status")).toBe("Terlambat");
   });
 
   it("omits the control schedule search query when the term is blank", async () => {
@@ -113,7 +131,12 @@ describe("ControlApi", () => {
 
     await api.listControlSchedules("   ");
 
-    expect(calls[0].url).toBe("/api/control-schedules");
+    const url = new URL(calls[0].url, "http://localhost");
+    expect(url.pathname).toBe("/api/control-schedules");
+    expect(url.searchParams.has("search")).toBe(false);
+    expect(url.searchParams.get("page")).toBe("1");
+    expect(url.searchParams.get("pageSize")).toBe("20");
+    expect(url.searchParams.has("status")).toBe(false);
   });
 
   it("notifies the session layer on a 401 so the token can be cleared", async () => {
@@ -248,7 +271,25 @@ describe("ControlApi patient directory and archiving", () => {
 
     await api.listPatientDirectory("Siti Nur");
 
-    expect(calls[0].url).toBe("/api/patients/directory?search=Siti%20Nur");
+    const url = new URL(calls[0].url, "http://localhost");
+    expect(url.pathname).toBe("/api/patients/directory");
+    expect(url.searchParams.get("search")).toBe("Siti Nur");
+    expect(url.searchParams.get("page")).toBe("1");
+    expect(url.searchParams.get("pageSize")).toBe("20");
+  });
+
+  it("passes pagination and status filters to the patient directory endpoint", async () => {
+    const calls = mockFetch({ body: [] });
+    const api = new ControlApi("token-123");
+
+    await api.listPatientDirectory("Siti", 2, 15, "Terlambat");
+
+    const url = new URL(calls[0].url, "http://localhost");
+    expect(url.pathname).toBe("/api/patients/directory");
+    expect(url.searchParams.get("search")).toBe("Siti");
+    expect(url.searchParams.get("page")).toBe("2");
+    expect(url.searchParams.get("pageSize")).toBe("15");
+    expect(url.searchParams.get("status")).toBe("Terlambat");
   });
 
   it("fetches the card stats", async () => {
