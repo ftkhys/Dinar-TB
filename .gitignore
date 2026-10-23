@@ -23,6 +23,14 @@ npm-debug.log*
 *.key
 
 # Local backups and archives
+backups/
+*.dump
 *.tar
 *.tar.gz
 *.zip
+
+# Editor and local backup files
+*.bak
+*.bak.*
+*.orig
+*.rej

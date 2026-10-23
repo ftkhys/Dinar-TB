@@ -1,4 +1,5 @@
 import { BadRequestException, Body, Controller, Param, Post, Req, UseGuards } from '@nestjs/common';
+import type { Request } from 'express';
 import { AuthenticatedRequest } from '../auth/auth.types';
 import { StaffAuthGuard } from '../auth/staff-auth.guard';
 import { isUuid, ActivationService } from './activation.service';
@@ -14,11 +15,11 @@ export class ActivationController {
   }
 
   @Post('activation/activate')
-  activate(@Body() body: { activationCode: string; deviceIdentifier: string }) {
+  activate(@Body() body: { activationCode: string; deviceIdentifier: string }, @Req() request: Request) {
     if (!body.activationCode || !body.deviceIdentifier || !isUuid(body.deviceIdentifier)) {
       throw new BadRequestException('Kode aktivasi dan deviceIdentifier UUID wajib diisi.');
     }
-    return this.activation.activate(body.activationCode, body.deviceIdentifier);
+    return this.activation.activate(body.activationCode, body.deviceIdentifier, request.ip ?? 'local');
   }
 
   @Post('activation/refresh')

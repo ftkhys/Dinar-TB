@@ -11,6 +11,8 @@ import {
 @Entity('patients')
 @Index('IDX_patients_register', ['registerNumber'])
 @Index('IDX_patients_medical_record', ['medicalRecordNumber'])
+@Index('IDX_patients_archived_at', ['archivedAt'])
+@Index('IDX_patients_anonymized_at', ['anonymizedAt'])
 export class Patient {
   @PrimaryGeneratedColumn('uuid')
   id!: string;
@@ -27,6 +29,15 @@ export class Patient {
   @Column({ type: 'text' })
   address!: string;
 
+  @Column({ name: 'date_of_birth', type: 'date', nullable: true })
+  dateOfBirth!: string | null;
+
+  @Column({ type: 'varchar', length: 20, nullable: true })
+  gender!: string | null;
+
+  @Column({ type: 'varchar', length: 32, nullable: true })
+  phone!: string | null;
+
   @Column({ type: 'varchar', length: 32, nullable: true, select: false })
   nik!: string | null;
 
@@ -38,6 +49,12 @@ export class Patient {
 
   @Column({ name: 'created_by_staff_id', type: 'uuid', nullable: true })
   createdByStaffId!: string | null;
+
+  @Column({ name: 'archived_at', type: 'timestamptz', nullable: true })
+  archivedAt!: Date | null;
+
+  @Column({ name: 'anonymized_at', type: 'timestamptz', nullable: true })
+  anonymizedAt!: Date | null;
 
   @VersionColumn({ name: 'version' })
   version!: number;

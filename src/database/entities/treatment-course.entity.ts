@@ -36,6 +36,20 @@ export class TreatmentCourse {
   @Column({ name: 'initial_target_end_date', type: 'date' })
   initialTargetEndDate!: string;
 
+  /**
+   * Real date of the most recent control visit, distinct from `startDate`.
+   * Nullable: unknown history is allowed and must not be treated as "late".
+   */
+  @Column({ name: 'last_control_date', type: 'date', nullable: true })
+  lastControlDate!: string | null;
+
+  /**
+   * Real date medicine was last dispensed. Only this date — never `startDate`
+   * or `lastControlDate` — is used to derive the next control schedule.
+   */
+  @Column({ name: 'last_medication_date', type: 'date', nullable: true })
+  lastMedicationDate!: string | null;
+
   @Column({ name: 'final_decision', type: 'enum', enum: TreatmentDecision, enumName: 'treatment_decision', nullable: true })
   finalDecision!: TreatmentDecision | null;
 

@@ -12,5 +12,6 @@ import { ControlAlertsController } from './control-alerts.controller';
   imports: [TypeOrmModule.forFeature([ControlSchedule, FollowUp]), AuthModule],
   controllers: [FollowUpsController, ControlAlertsController],
   providers: [FollowUpsService, ControlAlertsService],
+  exports: [ControlAlertsService],
 })
 export class FollowUpsModule {}

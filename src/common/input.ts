@@ -25,3 +25,28 @@ export function requiredDate(value: unknown, name: string): string {
   }
   return value;
 }
+
+/** Validates an optional `YYYY-MM-DD` date, returning null when omitted. */
+export function optionalDate(value: unknown, name: string): string | null {
+  if (value === undefined || value === null || value === '') return null;
+  return requiredDate(value, name);
+}
+
+/** Validates an optional value against a fixed set of allowed choices. */
+export function optionalChoice(value: unknown, name: string, allowed: readonly string[]): string | null {
+  if (value === undefined || value === null || value === '') return null;
+  if (typeof value !== 'string' || !allowed.includes(value.trim())) {
+    throw new BadRequestException(`${name} tidak valid.`);
+  }
+  return value.trim();
+}
+
+/** Validates an optional phone number (digits with common separators). */
+export function optionalPhone(value: unknown, name: string, maxLength = 32): string | null {
+  const phone = optionalString(value, name, maxLength);
+  if (phone === null) return null;
+  if (!/^[0-9+()\-\s]{6,32}$/.test(phone)) {
+    throw new BadRequestException(`${name} tidak valid.`);
+  }
+  return phone;
+}

@@ -4,7 +4,9 @@
   "private": true,
   "description": "Backend for Dinar-TB: Digital Intervention for Adherence Reminder – Tuberculosis",
   "license": "UNLICENSED",
-  "engines": { "node": ">=20.19" },
+  "engines": {
+    "node": ">=20.19"
+  },
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
@@ -19,14 +21,25 @@
     "migration:run": "typeorm-ts-node-commonjs migration:run -d src/database/data-source.ts",
     "migration:revert": "typeorm-ts-node-commonjs migration:revert -d src/database/data-source.ts",
     "migration:show": "typeorm-ts-node-commonjs migration:show -d src/database/data-source.ts",
-    "staff:create": "ts-node src/auth/create-staff.ts"
+    "migration:run:prod": "node dist/database/migrate.js run",
+    "migration:show:prod": "node dist/database/migrate.js show",
+    "migration:revert:prod": "node dist/database/migrate.js revert",
+    "staff:create": "ts-node src/auth/create-staff.ts",
+    "staff:create:prod": "node dist/auth/create-staff.js",
+    "staff:bootstrap-admin": "ts-node src/auth/bootstrap-admin.ts",
+    "staff:bootstrap-admin:prod": "node dist/auth/bootstrap-admin.js",
+    "db:backfill-treatment-history": "ts-node src/database/backfill-treatment-history.ts"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.11",
     "@nestjs/config": "^4.0.2",
     "@nestjs/core": "^11.0.11",
+    "@nestjs/event-emitter": "^3.1.0",
     "@nestjs/platform-express": "^11.0.11",
     "@nestjs/typeorm": "^11.0.0",
+    "dotenv": "^17.4.2",
+    "exceljs": "^4.4.0",
+    "firebase-admin": "^12.5.0",
     "pg": "^8.13.3",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1",

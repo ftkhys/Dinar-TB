@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  The notification small icon is resolved at runtime by name
+  (getIdentifier("ic_stat_dinar", "drawable", ...)) and is not referenced from
+  any XML/manifest file. Without this keep rule the release resource optimizer
+  strips the resource and its name, so flutter_local_notifications would fail to
+  render every reminder.
+
+  The 15 second dose-reminder sound is likewise referenced only by name
+  (RawResourceAndroidNotificationSound('dinar_reminder_15s')) from Dart, so it
+  must be kept explicitly for the release resource optimizer.
+-->
+<resources xmlns:tools="http://schemas.android.com/tools"
+    tools:keep="@drawable/ic_stat_dinar,@raw/dinar_reminder_15s" />

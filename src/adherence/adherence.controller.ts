@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query, Req, UseGuards } from '@nestjs/common';
 import { AuthenticatedRequest } from '../auth/auth.types';
 import { DeviceAuthGuard } from '../auth/device-auth.guard';
 import { StaffAuthGuard } from '../auth/staff-auth.guard';
@@ -30,5 +30,11 @@ export class AdherenceController {
   @UseGuards(StaffAuthGuard)
   getForStaff(@Param('treatmentId') treatmentId: string) {
     return this.adherence.getStaffSummary(treatmentId);
+  }
+
+  @Get('adherence/reminders')
+  @UseGuards(StaffAuthGuard)
+  reminders(@Query('search') search?: string) {
+    return this.adherence.listReminders(search);
   }
 }

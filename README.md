@@ -17,7 +17,7 @@ Backend Dinar-TB (Digital Intervention for Adherence Reminder – Tuberculosis) 
 6. Jalankan server: `npm run start:dev`.
 7. Cek `GET http://localhost:3000/health`.
 
-Server membuka koneksi PostgreSQL saat bootstrap. Endpoint `/health` adalah pemeriksaan liveness aplikasi.
+Server membuka koneksi PostgreSQL saat bootstrap. Endpoint `/health` adalah pemeriksaan liveness aplikasi; `/health/ready` memeriksa koneksi database dan mengembalikan `503` jika database belum siap.
 
 ## API backend
 
@@ -43,6 +43,21 @@ Skema TypeORM tidak menggunakan `synchronize`; perubahan skema harus lewat migra
 - Jalankan: `npm run migration:run`
 - Lihat status: `npm run migration:show`
 - Batalkan terakhir: `npm run migration:revert`
+
+## Deployment produksi
+
+Migration **tidak berjalan otomatis** saat server start. Jalankan prosedur ini secara eksplisit, dalam satu jendela pemeliharaan:
+
+1. Pastikan backup database terbaru sudah dibuat dan dapat dipulihkan. Simpan backup di luar repository dengan izin `600`.
+2. Pasang dependency dan buat artefak terkompilasi: `npm ci && npm run build`.
+3. Periksa status migration dari artefak produksi: `npm run migration:show:prod`.
+4. Jika ada yang tertunda, jalankan: `npm run migration:run:prod`.
+5. Verifikasi ulang: `npm run migration:show:prod`, lalu cek `GET /health/ready`.
+6. Jalankan aplikasi: `npm run start:prod`.
+
+Semua migration berjalan dalam satu transaksi; bila salah satu gagal, perubahan akan di-rollback. Untuk pemulihan, utamakan restore backup yang sudah diverifikasi. `npm run migration:revert:prod` hanya untuk kasus terkontrol setelah dampak data ditinjau, bukan prosedur rutin.
+
+Jangan menaruh secret di argumen command line, log, atau repository. Batasi izin file server: `chmod 600 .env backups/*.dump`, `chmod 700 backups`, dan pastikan kepemilikan hanya untuk akun layanan. Folder `backups/` dan file `*.dump` sudah diabaikan git.
 
 ## Pemeriksaan
 

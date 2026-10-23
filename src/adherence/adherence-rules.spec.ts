@@ -24,4 +24,9 @@ describe('adherence status rules', () => {
       AdherenceStatus.MISSED,
     ]);
   });
+
+  it('does not create adherence days before a future treatment start date', () => {
+    const result = summarizeAdherence('2026-10-22', '2026-10-21', null, new Map());
+    expect(result).toEqual({ days: [], totalTaken: 0, totalMissed: 0, missedStreak: 0 });
+  });
 });

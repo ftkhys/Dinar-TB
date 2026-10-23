@@ -30,6 +30,9 @@ export class PatientDevice {
   @Column({ name: 'credential_hash', type: 'varchar', length: 64, select: false })
   credentialHash!: string;
 
+  @Column({ name: 'fcm_token', type: 'varchar', length: 512, nullable: true, select: false })
+  fcmToken!: string | null;
+
   @Column({ name: 'activated_at', type: 'timestamptz' })
   activatedAt!: Date;
 

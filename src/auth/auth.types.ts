@@ -1,6 +1,25 @@
 import { Request } from 'express';
 
-export type StaffPrincipal = { kind: 'staff'; id: string; username: string };
+/** The only two staff roles. `Admin` manages accounts and shared settings. */
+export const STAFF_ROLES = ['Admin', 'Petugas'] as const;
+export type StaffRole = (typeof STAFF_ROLES)[number];
+
+export function isStaffRole(value: unknown): value is StaffRole {
+  return typeof value === 'string' && (STAFF_ROLES as readonly string[]).includes(value);
+}
+
+export function asStaffRole(value: unknown): StaffRole {
+  return isStaffRole(value) ? value : 'Petugas';
+}
+
+export type StaffPrincipal = {
+  kind: 'staff';
+  id: string;
+  username: string;
+  role: StaffRole;
+  /** True when the account still holds an Admin-issued temporary password. */
+  mustChangePassword: boolean;
+};
 export type DevicePrincipal = { kind: 'patient_device'; id: string; patientId: string; version: number };
 export type AuthPrincipal = StaffPrincipal | DevicePrincipal;
 export type AuthenticatedRequest = Request & { user: AuthPrincipal };
@@ -11,6 +30,8 @@ export interface TokenClaims {
   username?: string;
   patientId?: string;
   version?: number;
+  /** Staff only: HMAC marker bound to the current password hash. */
+  pwv?: string;
   iat: number;
   exp: number;
 }

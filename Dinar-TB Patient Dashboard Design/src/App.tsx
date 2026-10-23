@@ -75,7 +75,7 @@ const reminders = [
 function AppShell({ page, setPage, children }: { page: Page; setPage: (p: Page) => void; children: ReactNode }) {
   return <div className="app-shell">
     <aside className="sidebar">
-      <div className="brand"><span className="brand-mark"><img src="/image/logo.svg" alt="Logo Dinar-TB" /></span><span>Dinar-TB.</span></div>
+      <div className="brand"><span className="brand-mark"><img src="/image/logo2.png" alt="Logo Dinar-TB" /></span><span>Dinar-TB.</span></div>
       <nav>{nav.map((item) => <button key={item.label} className={`nav-item ${page === item.label ? "active" : ""}`} onClick={() => setPage(item.label)}><Icon name={item.icon} /><span>{item.label}</span></button>)}</nav>
       <div className="sidebar-help"><span className="help-icon">?</span><div><strong>Butuh bantuan?</strong><small>Panduan Dinar-TB</small></div></div>
     </aside>
@@ -311,7 +311,7 @@ const mobileNav: { label: PatientTab; icon: IconName }[] = [
 
 function MobileHeader({ title, back, onBack, notification = true }: { title?: string; back?: boolean; onBack?: () => void; notification?: boolean }) {
   return <header className={`m-header ${!title && !back ? "home-header" : ""}`}>
-    {back ? <button className="m-round-button" onClick={onBack} aria-label="Kembali"><Icon name="chevron" /></button> : <div className="m-brand"><span className="brand-mark"><img src="/image/logo.svg" alt="Logo Dinar-TB" /></span><strong>Dinar-TB.</strong></div>}
+    {back ? <button className="m-round-button" onClick={onBack} aria-label="Kembali"><Icon name="chevron" /></button> : <div className="m-brand"><span className="brand-mark"><img src="/image/logo2.png" alt="Logo Dinar-TB" /></span><strong>Dinar-TB.</strong></div>}
     {title && <strong className="m-header-title">{title}</strong>}
     {notification ? <button className="m-round-button m-notification" aria-label="Notifikasi"><Icon name="bell" /><i /></button> : <span className="m-header-spacer" />}
   </header>;
@@ -370,7 +370,7 @@ function PatientHome({ confirmed, onConfirm, onHistory, go }: { confirmed: boole
         {!confirmed && <button className="m-remind-later"><Icon name="bell" size={15} />Ingatkan saya 30 menit lagi</button>}
       </section>
       <button className="m-schedule-change" onClick={() => go("Jadwal")}><span><Icon name="alert" size={18} /></span><div><strong>Jadwal kontrol diperbarui</strong><p>Kontrol berikutnya Sabtu, 10 Oktober 2026.</p></div><Icon name="chevron" size={17} /></button>
-      <section className="m-card m-next-control"><div className="m-section-title"><div><h2>Kontrol Berikutnya</h2><p>Jangan lupa membawa kartu berobat</p></div><button onClick={() => go("Jadwal")}>Lihat detail</button></div><div className="m-date-block"><div><span>OKT</span><strong>10</strong></div><div><strong>Sabtu</strong><p>08.00–11.00 WIB</p><small>Puskesmas Kecamatan Cempaka</small></div></div><div className="m-countdown"><Icon name="clock" size={16} />15 hari lagi</div></section>
+      <section className="m-card m-next-control"><div className="m-section-title"><div><h2>Kontrol Berikutnya</h2><p>Jangan lupa membawa kartu berobat</p></div><button onClick={() => go("Jadwal")}>Lihat detail</button></div><div className="m-date-block"><div><span>OKT</span><strong>10</strong></div><div><strong>Sabtu</strong><p>08.00–11.00 WIB</p><small>Puskesmas Jatinegara</small></div></div><div className="m-countdown"><Icon name="clock" size={16} />15 hari lagi</div></section>
       <section className="m-card m-progress-preview"><div className="m-section-title"><div><h2>Perkembangan Pengobatan</h2><p>Berdasarkan catatan terverifikasi</p></div></div><div className="m-progress-label"><strong>Bulan ke-3 dari 6</strong><span>50%</span></div><div className="m-progress-track"><i /></div><div className="m-progress-stats"><div><strong>26</strong><span>Konfirmasi bulan ini</span></div><div><strong>3</strong><span>Kontrol selesai</span></div></div><button className="m-card-link" onClick={() => go("Perkembangan")}>Lihat perkembangan lengkap <span>→</span></button></section>
       <button className="m-history-link" onClick={onHistory}><span><Icon name="clock" /></span><div><strong>Riwayat Minum Obat</strong><p>Lihat konfirmasi harian Anda</p></div><Icon name="chevron" /></button>
     </main>
@@ -380,7 +380,7 @@ function PatientHome({ confirmed, onConfirm, onHistory, go }: { confirmed: boole
 function PatientSchedule() {
   return <div className="m-screen"><MobileHeader title="Jadwal Kontrol" />
     <main className="m-content">
-      <section className="m-control-hero"><span className="m-control-label"><Icon name="calendar" size={15} />Kontrol berikutnya</span><div className="m-control-date"><strong>10</strong><div><b>Oktober 2026</b><span>Sabtu</span></div></div><div className="m-control-meta"><span><Icon name="clock" size={16} />08.00–11.00 WIB</span><span><Icon name="home" size={16} />Puskesmas Cempaka</span></div><div className="m-countdown light">15 hari lagi</div></section>
+      <section className="m-control-hero"><span className="m-control-label"><Icon name="calendar" size={15} />Kontrol berikutnya</span><div className="m-control-date"><strong>10</strong><div><b>Oktober 2026</b><span>Sabtu</span></div></div><div className="m-control-meta"><span><Icon name="clock" size={16} />08.00–11.00 WIB</span><span><Icon name="home" size={16} />Puskesmas Jatinegara</span></div><div className="m-countdown light">15 hari lagi</div></section>
       <div className="m-info-strip blue"><Icon name="alert" size={18} /><p>Jadwal ini diperbarui petugas pada 25 September 2026. Hubungi petugas jika Anda berhalangan hadir.</p></div>
       <section className="m-card"><div className="m-section-title"><div><h2>Yang perlu disiapkan</h2><p>Sebelum datang ke Puskesmas</p></div></div><div className="m-check-list"><span><i><Icon name="check" size={14} /></i>Kartu berobat pasien</span><span><i><Icon name="check" size={14} /></i>Obat yang masih tersisa</span><span><i><Icon name="check" size={14} /></i>Catatan keluhan, jika ada</span></div></section>
       <section className="m-card m-visit-history"><div className="m-section-title"><div><h2>Riwayat Kontrol</h2><p>Kunjungan sebelumnya</p></div></div>
@@ -420,7 +420,7 @@ function PatientProfile({ help, setHelp }: { help: boolean; setHelp: (show: bool
     <main className="m-content">
       <section className="m-profile-card"><div className="m-profile-avatar">ML</div><h1>Maya Lestari</h1><p>Nomor Register</p><strong>2026-00008214-0007</strong><Badge tone="green">Pengobatan aktif</Badge></section>
       <section className="m-card m-profile-info"><div className="m-section-title"><div><h2>Informasi Pengobatan</h2><p>Data terverifikasi Puskesmas</p></div></div><div><span>Mulai pengobatan</span><strong>12 Juli 2026</strong></div><div><span>Tahap saat ini</span><strong>Bulan ke-3</strong></div><div><span>Kontrol berikutnya</span><strong>10 Oktober 2026</strong></div><div><span>Waktu pengingat</span><strong>07.00 WIB</strong></div></section>
-      <section className="m-menu-list"><button onClick={() => setHelp(true)}><span className="blue"><Icon name="alert" /></span><div><strong>Bantuan & Informasi</strong><p>Cara menggunakan Dinar-TB</p></div><Icon name="chevron" /></button><button><span className="teal"><Icon name="users" /></span><div><strong>Hubungi Petugas</strong><p>Puskesmas Kecamatan Cempaka</p></div><Icon name="chevron" /></button><button><span className="yellow"><Icon name="bell" /></span><div><strong>Pengaturan Notifikasi</strong><p>Notifikasi aktif</p></div><Icon name="chevron" /></button></section>
+      <section className="m-menu-list"><button onClick={() => setHelp(true)}><span className="blue"><Icon name="alert" /></span><div><strong>Bantuan & Informasi</strong><p>Cara menggunakan Dinar-TB</p></div><Icon name="chevron" /></button><button><span className="teal"><Icon name="users" /></span><div><strong>Hubungi Petugas</strong><p>Puskesmas Jatinegara</p></div><Icon name="chevron" /></button><button><span className="yellow"><Icon name="bell" /></span><div><strong>Pengaturan Notifikasi</strong><p>Notifikasi aktif</p></div><Icon name="chevron" /></button></section>
       <section className="m-emergency-note"><strong>Butuh bantuan terkait obat?</strong><p>Jangan mengubah atau menghentikan obat sendiri. Hubungi petugas kesehatan terlebih dahulu.</p></section>
       <p className="m-version">Dinar-TB versi 1.0.0</p>
     </main>

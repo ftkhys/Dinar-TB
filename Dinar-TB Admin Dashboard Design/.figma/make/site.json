@@ -1,7 +1,12 @@
 {
+  "title": "Dinar-TB Admin",
   "description": "This health reminder app helps patients manage their tuberculosis medication schedules, providing timely notifications and tracking treatment progress.",
+  "language": "id",
   "robots": {
     "index": false
+  },
+  "icons": {
+    "icon": "/favicon.png"
   },
   "accessibility": {
     "addBypassLinks": false,
