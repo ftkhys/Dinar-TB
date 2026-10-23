@@ -1,65 +1,176 @@
-# Dinar-TB Backend
+# Dinar-TB
 
-Backend Dinar-TB (Digital Intervention for Adherence Reminder – Tuberculosis) untuk pemantauan pasien TBC di Poli TBC Puskesmas. Dibangun dengan NestJS, TypeScript, TypeORM, dan PostgreSQL.
+**Digital Intervention for Adherence Reminder – Tuberculosis**
 
-## Kebutuhan
+Dinar-TB adalah aplikasi pendukung pemantauan pengobatan pasien Tuberkulosis (TBC) di Poli TBC Puskesmas Jatinegara. Sistem ini dirancang untuk membantu petugas memantau kepatuhan pengobatan, mengelola jadwal kontrol, serta mendukung pengingat minum obat bagi pasien.
 
-- Node.js 20.19 atau lebih baru
-- PostgreSQL
+## Komponen Sistem
 
-## Menjalankan lokal
+Dinar-TB terdiri dari tiga komponen utama:
 
-1. Buat database PostgreSQL lokal bernama `dinar_tb` (atau atur nama lain di environment). Perintah ini hanya untuk database pengembangan baru.
-2. Salin `.env.example` menjadi `.env`, isi konfigurasi PostgreSQL lokal, lalu atur `AUTH_JWT_SECRET` ke secret acak minimal 32 byte (`openssl rand -base64 32`). Jangan commit `.env`.
-3. Pasang dependency: `npm install`.
-4. Jalankan migration: `npm run migration:run`.
-5. Buat akun petugas pertama: `npm run staff:create -- nama-pengguna` (password dimasukkan tersembunyi lewat terminal interaktif).
-6. Jalankan server: `npm run start:dev`.
-7. Cek `GET http://localhost:3000/health`.
+- **Admin Dashboard** — aplikasi web untuk petugas dalam mengelola data pasien, pengobatan, jadwal kontrol, pengingat, dan laporan sesuai hak akses.
+- **Patient App** — aplikasi Android berbasis Flutter untuk pasien, dengan dukungan penyimpanan lokal, pengingat minum obat, dan sinkronisasi data.
+- **Backend API** — layanan NestJS yang mengelola autentikasi, aturan bisnis, data, dan komunikasi antara aplikasi dengan database.
 
-Server membuka koneksi PostgreSQL saat bootstrap. Endpoint `/health` adalah pemeriksaan liveness aplikasi; `/health/ready` memeriksa koneksi database dan mengembalikan `503` jika database belum siap.
+## Teknologi
 
-## API backend
+| Komponen | Teknologi |
+|---|---|
+| Backend | NestJS, TypeScript |
+| Database | PostgreSQL |
+| ORM dan migrasi | TypeORM |
+| Admin Dashboard | React, TypeScript, Vite |
+| Patient App | Flutter, Dart |
+| Pengujian backend | Jest |
 
-Semua endpoint administrasi memerlukan bearer token dari `POST /auth/login`, kecuali endpoint aktivasi. Semua akun mempunyai akses petugas yang sama.
+## Struktur Repository
 
-- Pasien: `GET/POST /patients`, `GET/PATCH /patients/:id`
-- Treatment: `POST /patients/:id/treatments`, `GET /patients/:id/treatments`, `POST /treatments/:id/final-review`
-- Kunjungan: `POST /treatments/:id/visits`, `GET /patients/:id/visits`
-- Jadwal kontrol: `GET/POST/PATCH /treatments/:id/control-schedule`
-- Follow-up: `POST/GET /control-schedule/:scheduleId/follow-ups`
-- Alert kontrol H-1, Hari-H, dan terlambat: `GET /control-alerts` (dihitung saat dibaca dengan tanggal Asia/Jakarta)
-- Kepatuhan: `GET /treatments/:id/adherence`; device memakai `/patient/treatments/:id/adherence` dan `POST /patient/sync`
-- Aktivasi: `POST /patients/:id/activation-codes`, `POST /activation/activate`, `POST /activation/refresh`; data offline device tersedia di `GET /patient/me`
+```text
+Dinar-TB/
+├── src/                              # Backend API
+├── test/                             # Pengujian backend
+├── Dinar-TB Admin Dashboard Design/  # Aplikasi web petugas
+├── Dinar-TB Patient Dashboard Design/# Dashboard pasien
+├── dinar_tb_patient/                 # Aplikasi Flutter Android
+├── docs/                             # Dokumentasi teknis
+├── .env.example                      # Contoh konfigurasi
+├── package.json                      # Konfigurasi backend
+└── README.md
+```
 
-ID pasien internal adalah UUID. NIK bukan identifier/login dan tidak dikembalikan oleh endpoint data device. Status adherence dihitung saat dibaca pada zona waktu Asia/Jakarta; database menyimpan konfirmasi yang berhasil.
+## Fitur Utama
 
-## Migration
+- Pengelolaan pasien dan riwayat pengobatan.
+- Pemantauan konfirmasi minum obat dan kepatuhan pengobatan.
+- Pengaturan jadwal kontrol dan pengingat.
+- Autentikasi serta pembatasan akses berdasarkan peran pengguna.
+- Dukungan penyimpanan lokal dan sinkronisasi pada aplikasi pasien.
+- Pencatatan aktivitas dan pengelolaan data melalui backend terpusat.
 
-Skema TypeORM tidak menggunakan `synchronize`; perubahan skema harus lewat migration.
+Ketersediaan setiap fitur mengikuti implementasi dan konfigurasi masing-masing komponen.
 
-- Buat migration kosong: `npm run migration:create -- src/database/migrations/InitialSchema`
-- Generate dari perubahan entity: `npm run migration:generate -- src/database/migrations/DescriptiveName`
-- Jalankan: `npm run migration:run`
-- Lihat status: `npm run migration:show`
-- Batalkan terakhir: `npm run migration:revert`
+## Menjalankan Backend secara Lokal
 
-## Deployment produksi
+### Prasyarat
 
-Migration **tidak berjalan otomatis** saat server start. Jalankan prosedur ini secara eksplisit, dalam satu jendela pemeliharaan:
+- Node.js 20.19 atau lebih baru.
+- PostgreSQL.
+- npm.
 
-1. Pastikan backup database terbaru sudah dibuat dan dapat dipulihkan. Simpan backup di luar repository dengan izin `600`.
-2. Pasang dependency dan buat artefak terkompilasi: `npm ci && npm run build`.
-3. Periksa status migration dari artefak produksi: `npm run migration:show:prod`.
-4. Jika ada yang tertunda, jalankan: `npm run migration:run:prod`.
-5. Verifikasi ulang: `npm run migration:show:prod`, lalu cek `GET /health/ready`.
-6. Jalankan aplikasi: `npm run start:prod`.
+### Instalasi
 
-Semua migration berjalan dalam satu transaksi; bila salah satu gagal, perubahan akan di-rollback. Untuk pemulihan, utamakan restore backup yang sudah diverifikasi. `npm run migration:revert:prod` hanya untuk kasus terkontrol setelah dampak data ditinjau, bukan prosedur rutin.
+1. Siapkan database PostgreSQL khusus pengembangan.
+2. Salin `.env.example` menjadi `.env`.
+3. Isi konfigurasi database lokal dan secret autentikasi yang kuat.
+4. Instal dependency:
 
-Jangan menaruh secret di argumen command line, log, atau repository. Batasi izin file server: `chmod 600 .env backups/*.dump`, `chmod 700 backups`, dan pastikan kepemilikan hanya untuk akun layanan. Folder `backups/` dan file `*.dump` sudah diabaikan git.
+   ```bash
+   npm ci
+   ```
 
-## Pemeriksaan
+5. Jalankan migrasi database:
 
-- Unit test: `npm test`
-- Build TypeScript: `npm run build`
+   ```bash
+   npm run migration:run
+   ```
+
+6. Buat akun petugas pertama sesuai prosedur proyek:
+
+   ```bash
+   npm run staff:create -- nama-pengguna
+   ```
+
+7. Jalankan backend:
+
+   ```bash
+   npm run start:dev
+   ```
+
+Jangan jalankan migrasi menggunakan database produksi saat mengikuti panduan pengembangan lokal.
+
+## Pengujian dan Build
+
+Pengujian backend:
+
+```bash
+npm test
+```
+
+Build backend:
+
+```bash
+npm run build
+```
+
+Untuk menjalankan aplikasi Admin dan Flutter, gunakan konfigurasi serta petunjuk pada direktori masing-masing.
+
+## Dokumentasi
+
+Dokumentasi teknis tersedia di direktori [`docs/`](docs/), termasuk:
+
+- [Kontrak Frontend–Backend](docs/FE-BE-CONTRACT.md)
+- [Rencana Implementasi Sinkronisasi](docs/SYNC_IMPLEMENTATION_PLAN.md)
+
+## API Backend
+
+Endpoint administrasi menggunakan bearer token yang diperoleh melalui `POST /auth/login`, sesuai aturan autentikasi masing-masing endpoint.
+
+- **Pasien:** `GET/POST /patients`, `GET/PATCH /patients/:id`
+- **Pengobatan:** `POST /patients/:id/treatments`, `GET /patients/:id/treatments`, `POST /treatments/:id/final-review`
+- **Kunjungan:** `POST /treatments/:id/visits`, `GET /patients/:id/visits`
+- **Jadwal kontrol:** `GET/POST/PATCH /treatments/:id/control-schedule`
+- **Follow-up kontrol:** `POST/GET /control-schedule/:scheduleId/follow-ups`
+- **Peringatan kontrol:** `GET /control-alerts`
+- **Kepatuhan:** `GET /treatments/:id/adherence`
+- **Sinkronisasi aplikasi pasien:** `POST /patient/sync`
+- **Aktivasi perangkat:** `POST /patients/:id/activation-codes`, `POST /activation/activate`, `POST /activation/refresh`
+- **Data perangkat pasien:** `GET /patient/me`
+
+ID pasien internal menggunakan UUID. NIK tidak digunakan sebagai identifier atau login aplikasi pasien.
+
+## Migrasi Database
+
+Skema database dikelola melalui migrasi TypeORM. Jangan mengaktifkan sinkronisasi skema otomatis untuk menggantikan migrasi.
+
+Perintah yang tersedia:
+
+- Membuat migrasi kosong: `npm run migration:create -- src/database/migrations/InitialSchema`
+- Membuat migrasi dari perubahan entity: `npm run migration:generate -- src/database/migrations/DescriptiveName`
+- Menjalankan migrasi lokal: `npm run migration:run`
+- Memeriksa status migrasi lokal: `npm run migration:show`
+- Membatalkan migrasi lokal terakhir: `npm run migration:revert`
+
+Gunakan database pengembangan khusus saat mengikuti petunjuk lokal. Periksa isi migrasi sebelum menjalankannya. Jangan menjalankan perintah migrasi lokal terhadap database produksi.
+
+## Catatan Deployment Produksi
+
+Migrasi produksi dijalankan secara eksplisit dan tidak otomatis saat aplikasi mulai.
+
+Sebelum memperbarui aplikasi produksi:
+
+1. Pastikan backup database terbaru tersedia dan dapat dipulihkan.
+2. Tinjau perubahan kode dan migrasi.
+3. Siapkan build aplikasi.
+4. Periksa status migrasi menggunakan `npm run migration:show:prod`.
+5. Jalankan migrasi tertunda hanya setelah backup, dampak perubahan, dan prosedur pemulihan dipastikan.
+6. Periksa kesiapan aplikasi melalui `GET /health/ready` setelah pembaruan.
+
+Perintah `npm run migration:run:prod` dan `npm run migration:revert:prod` hanya boleh digunakan melalui prosedur deployment yang telah diverifikasi. Jangan menjadikan revert sebagai prosedur pemulihan rutin.
+
+Jangan menyimpan secret, kredensial, backup database, atau data pasien nyata di repository. Simpan backup di luar repository dengan izin akses terbatas.
+
+## Keamanan
+
+- Jangan commit file `.env`, kredensial, token, atau konfigurasi rahasia.
+- Jangan menyimpan data pasien nyata, cadangan database, atau data pribadi di repository.
+- Gunakan database pengembangan terpisah dari database produksi.
+- Perubahan skema database harus dilakukan melalui migrasi yang ditinjau dan diuji.
+- Simpan konfigurasi deployment dan secret di lingkungan yang sesuai, bukan di source code.
+
+## Status Proyek
+
+Repository ini menyimpan source code dan dokumentasi Dinar-TB. Perubahan aplikasi, pengujian, dan deployment dikelola secara bertahap. Keberadaan kode di repository tidak dengan sendirinya menjamin seluruh fitur sudah siap untuk penggunaan produksi.
+
+---
+
+**Dinar-TB** — Sistem pendukung pemantauan pengobatan TBC di Puskesmas Jatinegara.
