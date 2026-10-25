@@ -34,10 +34,9 @@ react(),
       host: process.env.FIGMA_DEV_SERVER_HOST || '0.0.0.0',
       port: parseInt(process.env.PORT || '8443'),
       strictPort: true,
-      allowedHosts: ['mall-mine-duck-novels.trycloudflare.com'],
       proxy: {
         '/api': {
-          target: process.env.DINAR_TB_API_TARGET || 'http://localhost:3000',
+          target: process.env.DINAR_TB_API_TARGET || 'https://api.dinartb.my.id',
           changeOrigin: true,
           rewrite: path => path.replace(/^\/api/, ''),
         },
