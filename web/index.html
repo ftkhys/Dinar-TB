@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Dinar-TB — Digital Intervention for Adherence Reminder – Tuberculosis. Sistem pendukung pengingat pengobatan dan pemantauan kepatuhan pasien TB.">
+  <meta name="theme-color" content="#132f56">
+  <link rel="icon" type="image/png" href="/logo2.png">
+  <title>Dinar-TB — Pengingat Pengobatan TB</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --navy: #132f56;
+      --navy-light: #edf2f9;
+      --ink: #1f2937;
+      --muted: #5b6573;
+      --line: #dbe3ed;
+      --white: #fff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #f7f9fc;
+      color: var(--ink);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+    header {
+      padding: 22px 7%;
+      background: var(--white);
+      border-bottom: 1px solid var(--line);
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      max-width: 1080px;
+      margin: auto;
+      color: var(--navy);
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: .02em;
+    }
+    .brand-logo {
+      display: block;
+      width: 48px;
+      height: 48px;
+      flex: 0 0 auto;
+      object-fit: contain;
+    }
+    main {
+      max-width: 1080px;
+      margin: auto;
+      padding: 76px 7% 64px;
+    }
+    .eyebrow {
+      color: #3b5b85;
+      font-size: .8rem;
+      font-weight: 800;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+    h1 {
+      max-width: 720px;
+      margin: 14px 0 18px;
+      color: var(--navy);
+      font-size: clamp(2.2rem, 5vw, 3.7rem);
+      line-height: 1.12;
+      letter-spacing: -.045em;
+    }
+    .intro {
+      max-width: 680px;
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+    .choices {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+      margin-top: 42px;
+    }
+    .card {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      min-height: 235px;
+      padding: 28px;
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: 0 8px 28px rgba(19, 47, 86, .06);
+    }
+    .icon {
+      display: grid;
+      width: 46px;
+      height: 46px;
+      place-items: center;
+      margin-bottom: 18px;
+      border-radius: 13px;
+      background: var(--navy-light);
+      color: var(--navy);
+      font-size: 1.35rem;
+    }
+    h2 { margin: 0 0 8px; font-size: 1.3rem; }
+    .card p { flex: 1; margin: 0 0 22px; color: var(--muted); }
+    .button {
+      display: inline-block;
+      padding: 11px 18px;
+      border: 1px solid var(--navy);
+      border-radius: 10px;
+      background: var(--navy);
+      color: white;
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .button.secondary {
+      background: white;
+      color: var(--navy);
+    }
+    .button:focus-visible { outline: 3px solid #6f8fbd; outline-offset: 3px; }
+    .note {
+      margin-top: 32px;
+      color: var(--muted);
+      font-size: .9rem;
+    }
+    footer {
+      padding: 24px 7%;
+      border-top: 1px solid var(--line);
+      background: white;
+      color: var(--muted);
+      font-size: .88rem;
+      text-align: center;
+    }
+    @media (max-width: 640px) {
+      main { padding-top: 48px; }
+      .choices { grid-template-columns: 1fr; }
+      .card { min-height: 210px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <img class="brand-logo" src="/logo2.png" alt="Logo Dinar-TB" width="48" height="48">
+      <span>Dinar-TB<span aria-hidden="true">.</span></span>
+    </div>
+  </header>
+
+  <main>
+    <div class="eyebrow">Pendampingan pengobatan tuberkulosis</div>
+    <h1>Mendukung pengobatan TB, selangkah demi selangkah.</h1>
+    <p class="intro">
+      Dinar-TB (Digital Intervention for Adherence Reminder – Tuberculosis)
+      merupakan sistem pendukung pengingat pengobatan dan pemantauan
+      kepatuhan pasien tuberkulosis.
+    </p>
+
+    <section class="choices" aria-label="Pilih layanan Dinar-TB">
+      <article class="card">
+        <div class="icon" aria-hidden="true">▤</div>
+        <h2>Portal Petugas</h2>
+        <p>Untuk petugas kesehatan yang berwenang mengelola data dan pemantauan pengobatan pasien.</p>
+        <a class="button" href="https://admin.dinartb.my.id">Masuk Portal Petugas</a>
+      </article>
+
+      <article class="card">
+        <div class="icon" aria-hidden="true">▯</div>
+        <h2>Aplikasi Pasien</h2>
+        <p>Aplikasi Android untuk membantu pasien mengikuti pengingat pengobatan sesuai jadwal.</p>
+        <a class="button secondary" href="/pasien.html">Informasi Aplikasi</a>
+      </article>
+    </section>
+
+    <p class="note">
+      Gunakan portal sesuai peran dan akses yang diberikan. Lindungi informasi
+      kesehatan pribadi dan jangan membagikan kode aktivasi kepada orang lain.
+    </p>
+  </main>
+
+  <footer>
+    Dinar-TB · Sistem pendukung pengingat pengobatan tuberkulosis
+  </footer>
+</body>
+</html>
