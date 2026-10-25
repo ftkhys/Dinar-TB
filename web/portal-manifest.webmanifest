@@ -1,0 +1,59 @@
+{
+  "id": "/portal.html",
+  "name": "Dinar-TB Portal Pasien",
+  "short_name": "Dinar-TB",
+  "description": "Portal pasien Dinar-TB untuk panduan pengobatan, pemasangan aplikasi, dan informasi keamanan data tuberkulosis.",
+  "lang": "id",
+  "dir": "ltr",
+  "start_url": "/portal.html",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#f6f8fc",
+  "theme_color": "#132f56",
+  "categories": ["health", "medical", "education"],
+  "icons": [
+    {
+      "src": "/portal-icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/portal-icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/portal-icons/maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Portal Pasien",
+      "short_name": "Portal",
+      "url": "/portal.html",
+      "icons": [
+        {
+          "src": "/portal-icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Aplikasi Pasien",
+      "short_name": "Aplikasi",
+      "url": "/pasien.html",
+      "icons": [
+        {
+          "src": "/portal-icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ]
+}

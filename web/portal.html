@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Portal pasien Dinar-TB untuk panduan pengobatan, pemasangan aplikasi, dan informasi keamanan data tuberkulosis.">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#132f56">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Dinar-TB">
+  <link rel="icon" type="image/png" href="/logo2.png">
+  <link rel="apple-touch-icon" href="/portal-icons/apple-touch-icon.png">
+  <link rel="manifest" href="/portal-manifest.webmanifest">
+  <link rel="stylesheet" href="/portal.css">
+  <title>Portal Pasien — Dinar-TB</title>
+</head>
+<body>
+  <a class="skip-link" href="#main">Lewati ke konten</a>
+
+  <svg class="icon-sprite" aria-hidden="true" focusable="false">
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v11m0 0 4-4m-4 4-4-4"/><path d="M5 19h14"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M10.5 5.5h3M11 18.5h2"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4.5" y="10" width="15" height="10.5" rx="2.5"/><path d="M8 10V7.5a4 4 0 0 1 8 0V10M12 14v2.5"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 5 6v5.5c0 4.4 2.9 7.5 7 9.5 4.1-2 7-5.1 7-9.5V6l-7-3Z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-pill" viewBox="0 0 24 24"><rect x="3.8" y="8.2" width="16.4" height="7.6" rx="3.8" transform="rotate(-45 12 12)"/><path d="m8.8 8.8 6.4 6.4"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3.5" y="5.5" width="17" height="15" rx="2.5"/><path d="M7.5 3.5v4M16.5 3.5v4M3.5 10h17"/><path d="M8 14h3"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 19.5h16"/><path d="M6.5 16V11M11 16V6.5M15.5 16v-7M20 16v-3"/></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24"><path d="M18 9.5a6 6 0 0 0-12 0c0 6-2.5 6.5-2.5 6.5h17S18 15.5 18 9.5Z"/><path d="M10 19.5a2.2 2.2 0 0 0 4 0"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.2 4L19 7"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="m3.5 10.5 8.5-7 8.5 7"/><path d="M5.5 9.5v10h13v-10M9.5 19.5v-6h5v6"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.5-4 3-6 7-6s6.5 2 7 6"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></symbol>
+    <symbol id="i-share" viewBox="0 0 24 24"><path d="M12 15V3m0 0 4 4m-4-4L8 7"/><path d="M6 11H4.5v9.5h15V11H18"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M9.7 9.3a2.5 2.5 0 1 1 3.7 2.2c-.9.5-1.4 1-1.4 2.1"/><path d="M12 17h.01"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 10.5V17M12 7.2h.01"/></symbol>
+    <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M4 12h16m0 0-5-5m5 5-5 5"/></symbol>
+    <symbol id="i-map-pin" viewBox="0 0 24 24"><path d="M19 10c0 5.5-7 11-7 11S5 15.5 5 10a7 7 0 1 1 14 0Z"/><circle cx="12" cy="10" r="2.4"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3.8 21 20H3L12 3.8Z"/><path d="M12 9v5M12 17.2h.01"/></symbol>
+    <symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="M20 12H4m0 0 5-5m-5 5 5 5"/></symbol>
+  </svg>
+
+  <div class="site">
+    <header class="portal-header">
+      <div class="header-inner">
+        <a class="brand" href="/" aria-label="Dinar-TB, kembali ke halaman utama">
+          <img class="brand-logo" src="/logo2.png" alt="" width="44" height="44">
+          <span class="brand-name">Dinar-TB<span aria-hidden="true">.</span></span>
+        </a>
+        <span class="portal-tag">Portal Pasien</span>
+
+        <nav class="desktop-nav" aria-label="Navigasi portal">
+          <a href="#fitur">Fitur</a>
+          <a href="#keamanan">Keamanan</a>
+          <a href="#iphone">iPhone</a>
+          <a href="#bantuan">Bantuan</a>
+        </nav>
+
+        <div class="header-actions">
+          <button class="icon-button" type="button" data-dialog="help" aria-label="Buka bantuan">
+            <svg class="icon" aria-hidden="true"><use href="#i-help"/></svg>
+          </button>
+          <button class="button button-outline button-small install-button" type="button" data-install hidden>
+            <svg class="icon" aria-hidden="true"><use href="#i-download"/></svg>
+            Pasang
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main id="main">
+      <div id="locked-view">
+        <section class="hero" aria-labelledby="hero-title">
+          <div class="hero-copy">
+            <p class="eyebrow">Pendampingan pengobatan tuberkulosis</p>
+            <h1 id="hero-title">Pengobatan TB Anda, lebih teratur setiap hari.</h1>
+            <p class="hero-lead">
+              Dinar-TB membantu Anda mengingat jadwal minum obat, mencatat konfirmasi,
+              dan melihat jadwal kontrol. Aplikasi Android tersedia sekarang; portal
+              web disiapkan untuk Android dan iPhone.
+            </p>
+
+            <div class="hero-actions">
+              <a class="button button-primary" href="/Dinar-TB-Patient.apk" download="Dinar-TB-Patient.apk">
+                <svg class="icon" aria-hidden="true"><use href="#i-download"/></svg>
+                Unduh aplikasi Android
+              </a>
+              <button class="button button-secondary" type="button" data-dialog="iphone">
+                <svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>
+                Panduan iPhone
+              </button>
+            </div>
+
+            <div class="trust-row" aria-label="Informasi penting">
+              <span><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg> Data kesehatan dilindungi</span>
+              <span><svg class="icon" aria-hidden="true"><use href="#i-info"/></svg> Panduan resmi Dinar-TB</span>
+            </div>
+          </div>
+
+          <aside class="access-card" aria-labelledby="access-title">
+            <span class="access-status"><i aria-hidden="true"></i> Akses data web belum dibuka</span>
+            <div class="access-visual" aria-hidden="true">
+              <span class="access-ring"></span>
+              <span class="access-lock"><svg class="icon"><use href="#i-lock"/></svg></span>
+            </div>
+            <h2 id="access-title">Kami utamakan keamanan data Anda</h2>
+            <p>
+              Portal web belum menampilkan data pasien karena akses web yang aman
+              belum tersedia. Gunakan aplikasi Android untuk melihat jadwal dan
+              mengonfirmasi minum obat.
+            </p>
+            <a class="button button-light button-full" href="/Dinar-TB-Patient.apk" download="Dinar-TB-Patient.apk">
+              Unduh aplikasi Android
+            </a>
+            <button class="button button-ghost-light button-full" type="button" data-dialog="access">
+              Mengapa belum tersedia?
+            </button>
+            <p class="access-footnote">Jangan bagikan kode aktivasi kepada siapa pun.</p>
+          </aside>
+        </section>
+
+        <section class="section feature-section" id="fitur" aria-labelledby="features-title">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Yang dapat Anda lakukan</p>
+              <h2 id="features-title">Pendamping sehari-hari untuk pengobatan TB.</h2>
+            </div>
+            <p class="section-note">
+              Fitur data pasien saat ini tersedia melalui aplikasi Android.
+              Akses web akan dibuka setelah sesi aman siap.
+            </p>
+          </div>
+
+          <div class="feature-grid">
+            <article class="feature-card">
+              <span class="feature-icon"><svg class="icon" aria-hidden="true"><use href="#i-pill"/></svg></span>
+              <h3>Konfirmasi minum obat</h3>
+              <p>Catat konfirmasi harian agar riwayat pengobatan Anda tetap rapi dan mudah diperiksa.</p>
+              <span class="feature-meta">Tersedia di Android</span>
+            </article>
+
+            <article class="feature-card">
+              <span class="feature-icon feature-icon-teal"><svg class="icon" aria-hidden="true"><use href="#i-calendar"/></svg></span>
+              <h3>Jadwal kontrol</h3>
+              <p>Lihat jadwal kunjungan berikutnya dan hal-hal yang perlu dibawa ke fasilitas kesehatan.</p>
+              <span class="feature-meta">Tersedia di Android</span>
+            </article>
+
+            <article class="feature-card">
+              <span class="feature-icon feature-icon-gold"><svg class="icon" aria-hidden="true"><use href="#i-chart"/></svg></span>
+              <h3>Perkembangan pengobatan</h3>
+              <p>Pantau tahap pengobatan dan riwayat konfirmasi berdasarkan catatan yang terverifikasi.</p>
+              <span class="feature-meta">Tersedia di Android</span>
+            </article>
+
+            <article class="feature-card">
+              <span class="feature-icon feature-icon-rose"><svg class="icon" aria-hidden="true"><use href="#i-bell"/></svg></span>
+              <h3>Pengingat obat</h3>
+              <p>Terima pengingat sesuai jadwal yang ditetapkan petugas kesehatan.</p>
+              <span class="feature-meta">Tersedia di Android</span>
+            </article>
+          </div>
+        </section>
+
+        <section class="security-section" id="keamanan" aria-labelledby="security-title">
+          <div class="security-inner">
+            <div class="security-copy">
+              <p class="eyebrow eyebrow-light">Keamanan dan privasi</p>
+              <h2 id="security-title">Data pengobatan adalah data pribadi.</h2>
+              <p>
+                Dinar-TB hanya menampilkan informasi pengobatan kepada pasien yang
+                berhak. Akses web memerlukan sesi yang aman, bukan sekadar kode
+                aktivasi perangkat.
+              </p>
+            </div>
+
+            <ul class="security-list">
+              <li>
+                <span><svg class="icon" aria-hidden="true"><use href="#i-lock"/></svg></span>
+                <div><strong>Jangan bagikan kode aktivasi</strong><p>Kode hanya diberikan oleh petugas kesehatan dan tidak boleh dibagikan melalui pesan atau media sosial.</p></div>
+              </li>
+              <li>
+                <span><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg></span>
+                <div><strong>Waspadai permintaan mencurigakan</strong><p>Dinar-TB tidak meminta kata sandi atau kode aktivasi melalui pesan singkat.</p></div>
+              </li>
+              <li>
+                <span><svg class="icon" aria-hidden="true"><use href="#i-help"/></svg></span>
+                <div><strong>Hubungi petugas jika ragu</strong><p>Jika ada kendala akses, hubungi petugas TB di fasilitas kesehatan Anda.</p></div>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="section iphone-section" id="iphone" aria-labelledby="iphone-title">
+          <div class="iphone-copy">
+            <p class="eyebrow">Untuk pengguna iPhone</p>
+            <h2 id="iphone-title">Tambahkan portal ke Layar Utama.</h2>
+            <p>
+              Portal dapat dipasang seperti aplikasi melalui Safari. Data pasien
+              tetap memerlukan akses aman; untuk konfirmasi obat dan pengingat,
+              gunakan aplikasi Android bila tersedia.
+            </p>
+            <button class="button button-secondary" type="button" data-dialog="iphone">
+              Lihat langkah pemasangan
+              <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg>
+            </button>
+          </div>
+
+          <ol class="install-steps">
+            <li>
+              <span class="step-number">1</span>
+              <div><strong>Buka di Safari</strong><p>Gunakan browser Safari pada iPhone atau iPad.</p></div>
+            </li>
+            <li>
+              <span class="step-number">2</span>
+              <div><strong>Ketuk tombol Bagikan</strong><p>Tombol bagikan berada di bagian bawah layar.</p></div>
+            </li>
+            <li>
+              <span class="step-number">3</span>
+              <div><strong>Pilih “Tambah ke Layar Utama”</strong><p>Portal akan muncul seperti aplikasi di layar utama.</p></div>
+            </li>
+          </ol>
+        </section>
+
+        <section class="section faq-section" id="bantuan" aria-labelledby="faq-title">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Pertanyaan umum</p>
+              <h2 id="faq-title">Bantuan singkat.</h2>
+            </div>
+            <p class="section-note">Jika masih ada kendala, hubungi petugas TB di fasilitas kesehatan Anda.</p>
+          </div>
+
+          <div class="faq-list">
+            <details>
+              <summary>Apakah portal web dapat menggantikan aplikasi Android?<span aria-hidden="true">+</span></summary>
+              <p>Belum. Aplikasi Android saat ini mendukung konfirmasi obat dan pengingat. Portal web disiapkan sebagai pelengkap untuk Android dan iPhone.</p>
+            </details>
+            <details>
+              <summary>Mengapa data pasien belum muncul di web?<span aria-hidden="true">+</span></summary>
+              <p>Data pasien hanya boleh ditampilkan setelah ada sesi web yang aman. Mekanisme tersebut belum tersedia, sehingga portal web belum membuka data pengobatan.</p>
+            </details>
+            <details>
+              <summary>Bagaimana cara mendapatkan kode aktivasi?<span aria-hidden="true">+</span></summary>
+              <p>Hubungi petugas kesehatan yang menangani pengobatan Anda. Kode aktivasi diterbitkan oleh petugas dan hanya berlaku untuk perangkat yang diaktifkan.</p>
+            </details>
+            <details>
+              <summary>Bisakah kode aktivasi Android dipakai untuk masuk ke web?<span aria-hidden="true">+</span></summary>
+              <p>Tidak. Kode aktivasi bersifat sekali pakai dan terikat pada perangkat. Memakainya di web dapat mengganggu akses aplikasi Android Anda.</p>
+            </details>
+            <details>
+              <summary>Apakah notifikasi iPhone sama dengan Android?<span aria-hidden="true">+</span></summary>
+              <p>Belum tentu. Dukungan notifikasi web berbeda menurut browser dan sistem operasi. Aplikasi Android tetap menjadi jalur utama untuk pengingat saat ini.</p>
+            </details>
+          </div>
+        </section>
+
+        <section class="local-preview" data-local-preview hidden aria-labelledby="preview-title">
+          <div>
+            <p class="eyebrow">Khusus pengembangan</p>
+            <h2 id="preview-title">Pratinjau dashboard lokal</h2>
+            <p>Tampilan dashboard dengan data contoh. Hanya tersedia di localhost dan tidak menampilkan data pasien.</p>
+          </div>
+          <a class="button button-secondary" href="/portal.html?demo=1">Buka pratinjau</a>
+        </section>
+      </div>
+
+      <div id="preview-root" hidden></div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <img src="/logo2.png" alt="" width="36" height="36">
+          <div>
+            <strong>Dinar-TB<span aria-hidden="true">.</span></strong>
+            <p>Digital Intervention for Adherence Reminder – Tuberculosis</p>
+          </div>
+        </div>
+        <nav class="footer-links" aria-label="Tautan footer">
+          <a href="/">Beranda</a>
+          <a href="/pasien.html">Aplikasi Pasien</a>
+          <a href="/Dinar-TB-Patient.apk" download="Dinar-TB-Patient.apk">Unduh APK</a>
+          <button type="button" data-dialog="privacy">Privasi</button>
+        </nav>
+      </div>
+    </footer>
+  </div>
+
+  <dialog class="info-dialog" id="info-dialog" aria-labelledby="dialog-title">
+    <div class="dialog-head">
+      <h2 id="dialog-title"></h2>
+      <button class="dialog-close" type="button" data-close aria-label="Tutup">
+        <svg class="icon" aria-hidden="true"><use href="#i-close"/></svg>
+      </button>
+    </div>
+    <div class="dialog-body" id="dialog-body"></div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="/portal.js" defer></script>
+</body>
+</html>
