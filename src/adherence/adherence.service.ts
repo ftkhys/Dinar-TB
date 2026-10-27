@@ -97,6 +97,74 @@ export class AdherenceService {
     return { results };
   }
 
+  /**
+   * Confirms today's dose for a browser session. There is no device row or
+   * device receipt here: the unique (treatment, date) row is the idempotency
+   * boundary, and the caller's patient id is always checked against the course.
+   */
+  async confirmWeb(
+    patientId: string,
+    treatmentId: string,
+    input: Record<string, unknown>,
+  ): Promise<unknown> {
+    const today = localTodayJakarta();
+    const requestedDate = input.adherenceDate === undefined
+      ? today
+      : requiredDate(input.adherenceDate, 'Tanggal obat');
+    if (requestedDate !== today) {
+      throw new BadRequestException('Konfirmasi web hanya dapat dilakukan untuk hari ini.');
+    }
+    const expectedVersion = input.expectedTreatmentVersion === undefined
+      ? null
+      : Number(input.expectedTreatmentVersion);
+    if (expectedVersion !== null && !Number.isInteger(expectedVersion)) {
+      throw new BadRequestException('Versi treatment tidak valid.');
+    }
+    const confirmationTime = new Date();
+
+    return this.dataSource.transaction(async (manager) => {
+      const course = await manager.getRepository(TreatmentCourse)
+        .createQueryBuilder('course')
+        .setLock('pessimistic_write')
+        .where('course.id = :id', { id: treatmentId })
+        .getOne();
+      if (!course || course.patientId !== patientId) {
+        throw new NotFoundException('Treatment tidak ditemukan pada pasien ini.');
+      }
+      if (requestedDate < course.startDate) {
+        throw new BadRequestException('Tanggal obat tidak boleh sebelum tanggal mulai pengobatan.');
+      }
+      if (course.completedAt && requestedDate > dateInTimeZone(course.completedAt, 'Asia/Jakarta')) {
+        throw new ConflictException('Pengobatan sudah selesai.');
+      }
+      const existing = await manager.getRepository(DailyAdherence).findOneBy({
+        treatmentCourseId: course.id,
+        adherenceDate: requestedDate,
+      });
+      if (existing) {
+        return { code: 'DUPLICATE', adherence: existing };
+      }
+      if (expectedVersion !== null && course.version !== expectedVersion) {
+        return {
+          code: 'CONFLICT',
+          message: 'Data pengobatan berubah. Muat ulang lalu coba lagi.',
+          serverVersion: course.version,
+        };
+      }
+      const row = await manager.getRepository(DailyAdherence).save(
+        manager.getRepository(DailyAdherence).create({
+          treatmentCourseId: course.id,
+          adherenceDate: requestedDate,
+          status: AdherenceStatus.TAKEN,
+          confirmedAt: confirmationTime,
+          sourceDeviceId: null,
+          confirmedByStaffId: null,
+        }),
+      );
+      return { code: 'APPLIED', adherence: row };
+    });
+  }
+
   async getDeviceSummary(deviceId: string, treatmentId: string): Promise<AdherenceSummary> {
     const device = await this.devices.findOneBy({ id: deviceId });
     if (!device) throw new NotFoundException('Device tidak ditemukan.');

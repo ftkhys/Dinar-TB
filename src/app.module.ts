@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { EventEmitterModule } from '@nestjs/event-emitter';
+import { ScheduleModule } from '@nestjs/schedule';
 import { AdherenceModule } from './adherence/adherence.module';
 import { ActivationModule } from './devices/activation.module';
 import { AuthModule } from './auth/auth.module';
@@ -19,6 +20,7 @@ import { SettingsModule } from './settings/settings.module';
 import { StaffModule } from './staff/staff.module';
 import { TreatmentsModule } from './treatments/treatments.module';
 import { VisitsModule } from './visits/visits.module';
+import { WebSessionModule } from './web-session/web-session.module';
 
 @Module({
   imports: [
@@ -40,6 +42,7 @@ import { VisitsModule } from './visits/visits.module';
       }),
     }),
     EventEmitterModule.forRoot(),
+    ScheduleModule.forRoot(),
     AuditModule,
     AuthModule,
     StaffModule,
@@ -57,6 +60,7 @@ import { VisitsModule } from './visits/visits.module';
     ImportsModule,
     ReportsModule,
     HealthModule,
+    WebSessionModule,
   ],
 })
 export class AppModule {}

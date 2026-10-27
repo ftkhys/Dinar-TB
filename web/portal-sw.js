@@ -1,10 +1,13 @@
 'use strict';
 
-var CACHE_NAME = 'dinar-tb-portal-v1';
+var CACHE_NAME = 'dinar-tb-portal-v7';
 var STATIC_ASSETS = [
+  '/pasien.html',
   '/portal.html',
   '/portal.css',
   '/portal.js',
+  '/portal-app.js',
+  '/config.js',
   '/portal-preview.js',
   '/portal-manifest.webmanifest',
   '/logo2.png',
@@ -43,18 +46,18 @@ self.addEventListener('fetch', function (event) {
   if (url.origin !== self.location.origin) return;
 
   if (request.mode === 'navigate') {
-    if (url.pathname !== '/portal.html') return;
+    if (url.pathname !== '/pasien.html' && url.pathname !== '/portal.html') return;
     event.respondWith(
       fetch(request)
         .then(function (response) {
           if (response && response.ok) {
             var copy = response.clone();
-            caches.open(CACHE_NAME).then(function (cache) { cache.put('/portal.html', copy); });
+            caches.open(CACHE_NAME).then(function (cache) { cache.put(url.pathname, copy); });
           }
           return response;
         })
         .catch(function () {
-          return caches.match('/portal.html');
+          return caches.match(url.pathname);
         })
     );
     return;
@@ -73,6 +76,45 @@ self.addEventListener('fetch', function (event) {
         caches.open(CACHE_NAME).then(function (cache) { cache.put(request, copy); });
         return response;
       });
+    })
+  );
+});
+
+self.addEventListener('push', function (event) {
+  var data = {};
+  if (event.data) {
+    try {
+      data = event.data.json();
+    } catch (error) {
+      data = { body: event.data.text() };
+    }
+  }
+  var title = data.title || 'Dinar-TB';
+  var options = {
+    body: data.body || 'Ada pengingat pengobatan dari Dinar-TB.',
+    icon: data.icon || '/portal-icons/icon-192.png',
+    badge: data.badge || '/portal-icons/icon-192.png',
+    tag: data.tag || 'dinar-tb-reminder',
+    data: data.data || { url: '/pasien.html?app=1' },
+    renotify: false
+  };
+  event.waitUntil(self.registration.showNotification(title, options));
+});
+
+self.addEventListener('notificationclick', function (event) {
+  event.notification.close();
+  var target = event.notification.data && event.notification.data.url
+    ? event.notification.data.url
+    : '/pasien.html?app=1';
+  var targetUrl = new URL(target, self.location.origin).href;
+  event.waitUntil(
+    self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then(function (clientList) {
+      for (var index = 0; index < clientList.length; index += 1) {
+        var client = clientList[index];
+        if (client.url === targetUrl && 'focus' in client) return client.focus();
+      }
+      if (self.clients.openWindow) return self.clients.openWindow(targetUrl);
+      return null;
     })
   );
 });

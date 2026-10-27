@@ -115,7 +115,7 @@ export class ActivationService {
       const repo = manager.getRepository(ActivationCode);
       await repo.save(repo.create({
         patientId,
-        codeHash: hash(normalizeActivationCode(code)),
+        codeHash: hashActivationCode(code),
         expiresAt,
         usedAt: null,
         issuedByStaffId: staffId,
@@ -133,7 +133,7 @@ export class ActivationService {
     if (this.limiter.isBlocked(clientKey)) {
       throw new HttpException('Terlalu banyak percobaan aktivasi. Silakan coba lagi nanti.', 429);
     }
-    const codeHash = hash(normalizeActivationCode(code));
+    const codeHash = hashActivationCode(code);
     const now = new Date();
     const deviceCredential = randomBytes(32).toString('base64url');
     let result: { device: PatientDevice; patientId: string };
@@ -210,6 +210,10 @@ export class ActivationService {
       accessToken: this.auth.sign({ sub: device.id, kind: 'patient_device', patientId: device.patientId, version: device.version }, 30 * 24 * 60 * 60),
     };
   }
+}
+
+export function hashActivationCode(value: string): string {
+  return hash(normalizeActivationCode(value));
 }
 
 function hash(value: string): string {

@@ -1,14 +1,72 @@
 (function () {
   'use strict';
 
-  var state = { tab: 'beranda', confirmed: false };
+  var state = { tab: 'beranda', confirmed: false, reminderWindows: [] };
+  var REMINDER_LABELS = ['Pengingat utama', 'Pengingat malam'];
+  var TIME_PATTERN = /^([01]\d|2[0-3]):[0-5]\d$/;
 
   function icon(name, className) {
     return '<svg class="icon ' + (className || '') + '" aria-hidden="true"><use href="#i-' + name + '"/></svg>';
   }
 
+  /**
+   * The backend sends exactly two windows in the order used by the Admin
+   * settings: reminderMorning first, reminderEvening second. Keep that order
+   * so "utama" and "malam" never get swapped, even when a time wraps midnight.
+   */
+  function normalizeReminderWindows(windows) {
+    var normalized = [];
+    for (var index = 0; index < 2; index += 1) {
+      var item = Array.isArray(windows) ? windows[index] : null;
+      if (!item || typeof item.start !== 'string' || !TIME_PATTERN.test(item.start)) {
+        normalized.push(null);
+      } else {
+        normalized.push({
+          start: item.start,
+          end: typeof item.end === 'string' && TIME_PATTERN.test(item.end) ? item.end : null
+        });
+      }
+    }
+    return normalized;
+  }
+
+  function hasReminderWindows() {
+    return state.reminderWindows.some(function (window) { return window !== null; });
+  }
+
+  function formatReminderTime(value) {
+    return value.replace(':', '.');
+  }
+
+  function reminderSlot(index) {
+    var window = state.reminderWindows[index];
+    return '<div class="medicine-time' + (window ? '' : ' is-empty') + '">' +
+      '<span>' + REMINDER_LABELS[index] + '</span>' +
+      '<strong>' + (window ? formatReminderTime(window.start) + ' <small>WIB</small>' : '—') + '</strong>' +
+      '</div>';
+  }
+
+  function medicineTimes() {
+    return '<div class="medicine-times" aria-label="Jadwal pengingat minum obat dari petugas">' +
+      reminderSlot(0) + reminderSlot(1) +
+      '</div>';
+  }
+
+  function medicineSourceNote() {
+    return '<p class="medicine-source">' +
+      (hasReminderWindows()
+        ? 'Waktu mengikuti pengaturan petugas.'
+        : 'Pratinjau lokal belum terhubung ke pengaturan petugas. Waktu aktual dimuat dari backend setelah sesi aman tersedia.') +
+      '</p>';
+  }
+
+  function profileReminderValue(index) {
+    var window = state.reminderWindows[index];
+    return window ? formatReminderTime(window.start) + ' WIB' : 'Belum tersedia';
+  }
+
   function brand() {
-    return '<a class="demo-brand" href="/portal.html" aria-label="Dinar-TB">' +
+    return '<a class="demo-brand" href="/pasien.html" aria-label="Dinar-TB">' +
       '<img src="/logo2.png" alt="" width="38" height="38">' +
       '<span>Dinar-TB<span aria-hidden="true">.</span></span>' +
       '</a>';
@@ -41,7 +99,7 @@
   function banner() {
     return '<div class="demo-banner">' +
       '<span>' + icon('info') + 'Pratinjau lokal · data contoh, bukan data pasien</span>' +
-      '<a href="/portal.html">Keluar pratinjau</a>' +
+      '<a href="/pasien.html">Keluar pratinjau</a>' +
       '</div>';
   }
 
@@ -49,7 +107,7 @@
     return '<div class="demo-topbar">' +
       brand() +
       '<span class="demo-chip">' + icon('lock') + 'Mode pratinjau</span>' +
-      '<a class="demo-exit" href="/portal.html">' + icon('arrow-left') + 'Portal</a>' +
+      '<a class="demo-exit" href="/pasien.html">' + icon('arrow-left') + 'Portal</a>' +
       '</div>';
   }
 
@@ -69,13 +127,14 @@
       '</div>' +
       '<div class="medicine-main">' +
       '<span class="medicine-icon">' + icon('pill') + '</span>' +
-      '<div><p id="medicine-title">Jadwal minum obat</p><strong>07.00 <small>WIB</small></strong></div>' +
+      '<div class="medicine-main-copy"><p id="medicine-title">Jadwal minum obat</p>' + medicineTimes() + '</div>' +
       '</div>' +
       '<p class="medicine-copy">' +
       (confirmed
         ? 'Terima kasih. Konfirmasi contoh ini tersimpan di pratinjau lokal dan tidak dikirim ke server.'
         : 'Minum obat sesuai petunjuk petugas kesehatan, lalu lakukan konfirmasi.') +
       '</p>' +
+      medicineSourceNote() +
       '<button class="demo-primary" type="button" data-preview-action="confirm"' + (confirmed ? ' disabled' : '') + '>' +
       icon('check') + (confirmed ? 'Sudah minum obat' : 'Saya sudah minum obat') +
       '</button>' +
@@ -210,8 +269,10 @@
       '<div><span>Mulai pengobatan</span><strong>12 Juli 2026</strong></div>' +
       '<div><span>Tahap saat ini</span><strong>Bulan ke-3</strong></div>' +
       '<div><span>Kontrol berikutnya</span><strong>10 Oktober 2026</strong></div>' +
-      '<div><span>Waktu pengingat</span><strong>07.00 WIB</strong></div>' +
+      '<div><span>Pengingat utama</span><strong>' + profileReminderValue(0) + '</strong></div>' +
+      '<div><span>Pengingat malam</span><strong>' + profileReminderValue(1) + '</strong></div>' +
       '</div></section>' +
+      (hasReminderWindows() ? '' : '<div class="demo-info-strip" style="margin-top:12px">' + icon('info') + '<span>Pratinjau lokal belum membaca pengaturan pengingat petugas.</span></div>') +
       '<section class="demo-card" aria-labelledby="profile-menu-title">' +
       '<div class="demo-card-head"><div><h2 id="profile-menu-title">Bantuan dan informasi</h2><p>Pilihan pada pratinjau</p></div></div>' +
       '<div class="demo-menu">' +
@@ -250,7 +311,8 @@
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  function mount(root) {
+  function mount(root, options) {
+    state.reminderWindows = normalizeReminderWindows(options && options.reminderWindows);
     root.innerHTML = '<div class="demo-app">' +
       banner() + topbar() + nav() +
       '<div id="demo-panels"></div>' +

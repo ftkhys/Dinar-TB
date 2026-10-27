@@ -17,5 +17,6 @@ import { AdherenceService } from './adherence.service';
   ],
   controllers: [AdherenceController],
   providers: [AdherenceService],
+  exports: [AdherenceService],
 })
 export class AdherenceModule {}

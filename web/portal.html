@@ -81,7 +81,7 @@
             <p class="hero-lead">
               Dinar-TB membantu Anda mengingat jadwal minum obat, mencatat konfirmasi,
               dan melihat jadwal kontrol. Aplikasi Android tersedia sekarang; portal
-              web disiapkan untuk Android dan iPhone.
+              web dapat dipakai di Android dan iPhone.
             </p>
 
             <div class="hero-actions">
@@ -102,23 +102,23 @@
           </div>
 
           <aside class="access-card" aria-labelledby="access-title">
-            <span class="access-status"><i aria-hidden="true"></i> Akses data web belum dibuka</span>
+            <span class="access-status"><i aria-hidden="true"></i> Akses web aman tersedia</span>
             <div class="access-visual" aria-hidden="true">
               <span class="access-ring"></span>
               <span class="access-lock"><svg class="icon"><use href="#i-lock"/></svg></span>
             </div>
-            <h2 id="access-title">Kami utamakan keamanan data Anda</h2>
+            <h2 id="access-title">Masuk dengan kode aktivasi</h2>
             <p>
-              Portal web belum menampilkan data pasien karena akses web yang aman
-              belum tersedia. Gunakan aplikasi Android untuk melihat jadwal dan
-              mengonfirmasi minum obat.
+              Gunakan kode 8 karakter dari petugas. Kode hanya dapat dipakai sekali;
+              aktivasi web tidak mengganggu aplikasi Android yang sudah aktif.
             </p>
-            <a class="button button-light button-full" href="/Dinar-TB-Patient.apk" download="Dinar-TB-Patient.apk">
+            <a class="button button-light button-full" href="/pasien.html?app=1">
+              Masuk ke portal
+              <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg>
+            </a>
+            <a class="button button-ghost-light button-full" href="/Dinar-TB-Patient.apk" download="Dinar-TB-Patient.apk">
               Unduh aplikasi Android
             </a>
-            <button class="button button-ghost-light button-full" type="button" data-dialog="access">
-              Mengapa belum tersedia?
-            </button>
             <p class="access-footnote">Jangan bagikan kode aktivasi kepada siapa pun.</p>
           </aside>
         </section>
@@ -130,8 +130,8 @@
               <h2 id="features-title">Pendamping sehari-hari untuk pengobatan TB.</h2>
             </div>
             <p class="section-note">
-              Fitur data pasien saat ini tersedia melalui aplikasi Android.
-              Akses web akan dibuka setelah sesi aman siap.
+              Data pasien dapat dibuka di portal web setelah aktivasi aman, atau
+              melalui aplikasi Android.
             </p>
           </div>
 
@@ -140,28 +140,28 @@
               <span class="feature-icon"><svg class="icon" aria-hidden="true"><use href="#i-pill"/></svg></span>
               <h3>Konfirmasi minum obat</h3>
               <p>Catat konfirmasi harian agar riwayat pengobatan Anda tetap rapi dan mudah diperiksa.</p>
-              <span class="feature-meta">Tersedia di Android</span>
+              <span class="feature-meta">Portal &amp; Android</span>
             </article>
 
             <article class="feature-card">
               <span class="feature-icon feature-icon-teal"><svg class="icon" aria-hidden="true"><use href="#i-calendar"/></svg></span>
               <h3>Jadwal kontrol</h3>
               <p>Lihat jadwal kunjungan berikutnya dan hal-hal yang perlu dibawa ke fasilitas kesehatan.</p>
-              <span class="feature-meta">Tersedia di Android</span>
+              <span class="feature-meta">Portal &amp; Android</span>
             </article>
 
             <article class="feature-card">
               <span class="feature-icon feature-icon-gold"><svg class="icon" aria-hidden="true"><use href="#i-chart"/></svg></span>
               <h3>Perkembangan pengobatan</h3>
               <p>Pantau tahap pengobatan dan riwayat konfirmasi berdasarkan catatan yang terverifikasi.</p>
-              <span class="feature-meta">Tersedia di Android</span>
+              <span class="feature-meta">Portal &amp; Android</span>
             </article>
 
             <article class="feature-card">
               <span class="feature-icon feature-icon-rose"><svg class="icon" aria-hidden="true"><use href="#i-bell"/></svg></span>
               <h3>Pengingat obat</h3>
               <p>Terima pengingat sesuai jadwal yang ditetapkan petugas kesehatan.</p>
-              <span class="feature-meta">Tersedia di Android</span>
+              <span class="feature-meta">Portal &amp; Android</span>
             </article>
           </div>
         </section>
@@ -173,8 +173,8 @@
               <h2 id="security-title">Data pengobatan adalah data pribadi.</h2>
               <p>
                 Dinar-TB hanya menampilkan informasi pengobatan kepada pasien yang
-                berhak. Akses web memerlukan sesi yang aman, bukan sekadar kode
-                aktivasi perangkat.
+                berhak. Portal web memakai sesi aman berbasis cookie setelah kode
+                aktivasi sekali pakai berhasil diverifikasi.
               </p>
             </div>
 
@@ -200,9 +200,9 @@
             <p class="eyebrow">Untuk pengguna iPhone</p>
             <h2 id="iphone-title">Tambahkan portal ke Layar Utama.</h2>
             <p>
-              Portal dapat dipasang seperti aplikasi melalui Safari. Data pasien
-              tetap memerlukan akses aman; untuk konfirmasi obat dan pengingat,
-              gunakan aplikasi Android bila tersedia.
+              Portal dapat dipasang seperti aplikasi melalui Safari. Setelah
+              aktivasi, data pasien dan konfirmasi obat tersedia di portal. Web Push
+              memerlukan iOS 16.4+ dan portal yang sudah ditambahkan ke Layar Utama.
             </p>
             <button class="button button-secondary" type="button" data-dialog="iphone">
               Lihat langkah pemasangan
@@ -238,23 +238,23 @@
           <div class="faq-list">
             <details>
               <summary>Apakah portal web dapat menggantikan aplikasi Android?<span aria-hidden="true">+</span></summary>
-              <p>Belum. Aplikasi Android saat ini mendukung konfirmasi obat dan pengingat. Portal web disiapkan sebagai pelengkap untuk Android dan iPhone.</p>
+              <p>Portal web dan aplikasi Android sama-sama menampilkan data pengobatan. Konfirmasi obat dan jadwal pengingat mengikuti data yang sama dari petugas.</p>
             </details>
             <details>
-              <summary>Mengapa data pasien belum muncul di web?<span aria-hidden="true">+</span></summary>
-              <p>Data pasien hanya boleh ditampilkan setelah ada sesi web yang aman. Mekanisme tersebut belum tersedia, sehingga portal web belum membuka data pengobatan.</p>
+              <summary>Bagaimana portal web melindungi data saya?<span aria-hidden="true">+</span></summary>
+              <p>Portal memakai sesi aman berbasis cookie HttpOnly setelah kode aktivasi diverifikasi. Setiap permintaan hanya dapat mengakses data pasien pemilik sesi.</p>
             </details>
             <details>
               <summary>Bagaimana cara mendapatkan kode aktivasi?<span aria-hidden="true">+</span></summary>
-              <p>Hubungi petugas kesehatan yang menangani pengobatan Anda. Kode aktivasi diterbitkan oleh petugas dan hanya berlaku untuk perangkat yang diaktifkan.</p>
+              <p>Hubungi petugas kesehatan yang menangani pengobatan Anda. Kode aktivasi diterbitkan oleh petugas dan hanya berlaku sekali.</p>
             </details>
             <details>
-              <summary>Bisakah kode aktivasi Android dipakai untuk masuk ke web?<span aria-hidden="true">+</span></summary>
-              <p>Tidak. Kode aktivasi bersifat sekali pakai dan terikat pada perangkat. Memakainya di web dapat mengganggu akses aplikasi Android Anda.</p>
+              <summary>Apakah aktivasi web mengganggu aplikasi Android?<span aria-hidden="true">+</span></summary>
+              <p>Tidak. Aktivasi web membuat sesi browser terpisah dan tidak menonaktifkan atau mengubah perangkat Android yang sudah aktif.</p>
             </details>
             <details>
-              <summary>Apakah notifikasi iPhone sama dengan Android?<span aria-hidden="true">+</span></summary>
-              <p>Belum tentu. Dukungan notifikasi web berbeda menurut browser dan sistem operasi. Aplikasi Android tetap menjadi jalur utama untuk pengingat saat ini.</p>
+              <summary>Apakah notifikasi web tersedia di iPhone?<span aria-hidden="true">+</span></summary>
+              <p>Web Push di iPhone memerlukan iOS 16.4 atau lebih baru dan portal yang sudah ditambahkan ke Layar Utama melalui Safari.</p>
             </details>
           </div>
         </section>
@@ -262,11 +262,133 @@
         <section class="local-preview" data-local-preview hidden aria-labelledby="preview-title">
           <div>
             <p class="eyebrow">Khusus pengembangan</p>
-            <h2 id="preview-title">Pratinjau dashboard lokal</h2>
-            <p>Tampilan dashboard dengan data contoh. Hanya tersedia di localhost dan tidak menampilkan data pasien.</p>
+            <h2 id="preview-title">Pratinjau lokal</h2>
+            <p>Lihat dashboard contoh atau halaman sebelum aktivasi. Hanya tersedia di localhost dan tidak menampilkan data pasien.</p>
           </div>
-          <a class="button button-secondary" href="/portal.html?demo=1">Buka pratinjau</a>
+          <div class="local-preview-actions">
+            <a class="button button-primary" href="/pasien.html?demo=1">Buka dashboard demo</a>
+            <a class="button button-secondary" href="/pasien.html?demo=token">Lihat halaman token</a>
+          </div>
         </section>
+      </div>
+
+      <div id="patient-auth" class="token-preview" hidden>
+        <div class="token-app">
+          <div class="demo-topbar">
+            <a class="demo-brand" href="/pasien.html" aria-label="Dinar-TB">
+              <img src="/logo2.png" alt="" width="38" height="38">
+              <span>Dinar-TB<span aria-hidden="true">.</span></span>
+            </a>
+            <span class="demo-chip"><svg class="icon" aria-hidden="true"><use href="#i-lock"/></svg>Akses aman</span>
+            <a class="demo-exit" href="/pasien.html"><svg class="icon" aria-hidden="true"><use href="#i-arrow-left"/></svg>Portal</a>
+          </div>
+
+          <div class="token-layout">
+            <section class="token-card" aria-labelledby="web-activation-title">
+              <div class="token-heading">
+                <img class="token-logo" src="/logo2.png" alt="" width="64" height="64">
+                <p class="eyebrow">Portal pasien</p>
+                <h1 id="web-activation-title">Masuk dengan kode aktivasi</h1>
+                <p class="token-lead">Gunakan kode 8 karakter yang diberikan petugas Puskesmas. Kode hanya dapat dipakai sekali dan tidak boleh dibagikan.</p>
+              </div>
+
+              <form class="token-form" id="web-activation-form" novalidate>
+                <label class="token-label" for="web-activation-code">Kode aktivasi</label>
+                <input class="token-input" id="web-activation-code" name="activationCode" type="text" inputmode="text" autocomplete="one-time-code" autocapitalize="characters" spellcheck="false" maxlength="9" placeholder="K7QP-3RMN" aria-describedby="web-activation-help web-activation-status" required>
+                <p class="token-help" id="web-activation-help">8 karakter, sekali pakai. Jangan bagikan kode kepada siapa pun.</p>
+                <div class="token-status" id="web-activation-status" role="status" aria-live="polite" hidden></div>
+                <button class="button button-primary button-full token-submit" id="web-activation-submit" type="submit">
+                  Masuk
+                  <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg>
+                </button>
+              </form>
+
+              <div class="token-note">
+                <svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg>
+                <div>
+                  <strong>Aman dan sekali pakai</strong>
+                  <span>Aktivasi web membuat sesi browser terpisah dan tidak mengubah perangkat Android yang sudah aktif.</span>
+                </div>
+              </div>
+              <p class="token-footnote">Butuh bantuan? Hubungi petugas TB di fasilitas kesehatan Anda.</p>
+            </section>
+
+            <aside class="token-aside" aria-labelledby="web-activation-aside-title">
+              <span class="token-aside-icon"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg></span>
+              <p class="eyebrow eyebrow-light">Sesi aman</p>
+              <h2 id="web-activation-aside-title">Kode aktivasi bukan kata sandi.</h2>
+              <p>Kode diberikan langsung oleh petugas dan hanya berlaku untuk satu kali aktivasi. Sesi browser dapat diakhiri kapan saja melalui tombol keluar.</p>
+              <ul class="token-points">
+                <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Data hanya dapat dibaca oleh sesi pasien yang sah.</span></li>
+                <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Android yang sudah aktif tetap berfungsi.</span></li>
+                <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Jangan pernah mengirim kode melalui pesan atau media sosial.</span></li>
+              </ul>
+            </aside>
+          </div>
+        </div>
+      </div>
+
+      <div id="patient-app" hidden></div>
+
+      <div id="token-preview" class="token-preview" hidden>
+        <div class="token-app">
+          <div class="demo-banner">
+            <span><svg class="icon" aria-hidden="true"><use href="#i-info"/></svg>Pratinjau lokal · halaman token, bukan validasi sungguhan</span>
+            <a href="/pasien.html?demo=1">Dashboard demo</a>
+          </div>
+
+          <div class="demo-topbar">
+            <a class="demo-brand" href="/pasien.html" aria-label="Dinar-TB">
+              <img src="/logo2.png" alt="" width="38" height="38">
+              <span>Dinar-TB<span aria-hidden="true">.</span></span>
+            </a>
+            <span class="demo-chip"><svg class="icon" aria-hidden="true"><use href="#i-lock"/></svg>Mode pratinjau</span>
+            <a class="demo-exit" href="/pasien.html"><svg class="icon" aria-hidden="true"><use href="#i-arrow-left"/></svg>Portal</a>
+          </div>
+
+          <div class="token-layout">
+            <section class="token-card" aria-labelledby="token-title">
+              <div class="token-heading">
+                <img class="token-logo" src="/logo2.png" alt="" width="64" height="64">
+                <p class="eyebrow">Aktivasi portal pasien</p>
+                <h1 id="token-title">Masukkan kode aktivasi</h1>
+                <p class="token-lead">Gunakan kode 8 karakter yang diberikan petugas Puskesmas. Kode hanya dimasukkan sekali dan tidak boleh dibagikan.</p>
+              </div>
+
+              <form class="token-form" id="token-form" novalidate>
+                <label class="token-label" for="activation-code">Kode aktivasi</label>
+                <input class="token-input" id="activation-code" name="activationCode" type="text" inputmode="text" autocomplete="one-time-code" autocapitalize="characters" spellcheck="false" maxlength="9" placeholder="K7QP-3RMN" aria-describedby="token-help token-status" required>
+                <p class="token-help" id="token-help">8 karakter, sekali pakai. Jangan bagikan kode kepada siapa pun.</p>
+                <div class="token-status" id="token-status" role="status" aria-live="polite" hidden></div>
+                <button class="button button-primary button-full token-submit" type="submit">
+                  Lanjutkan
+                  <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg>
+                </button>
+              </form>
+
+              <div class="token-note">
+                <svg class="icon" aria-hidden="true"><use href="#i-info"/></svg>
+                <div>
+                  <strong>Mode pratinjau</strong>
+                  <span>Token tidak dikirim atau divalidasi di halaman ini. Tidak ada sesi atau data pasien yang dibuat.</span>
+                </div>
+              </div>
+              <p class="token-footnote">Butuh bantuan? Hubungi petugas TB di fasilitas kesehatan Anda.</p>
+            </section>
+
+            <aside class="token-aside" aria-labelledby="token-aside-title">
+              <span class="token-aside-icon"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg></span>
+              <p class="eyebrow eyebrow-light">Sekali pakai</p>
+              <h2 id="token-aside-title">Kode aktivasi bukan kata sandi.</h2>
+              <p>Kode diberikan langsung oleh petugas dan hanya berlaku untuk satu kali aktivasi. Jangan pernah mengirimkannya melalui pesan atau media sosial.</p>
+              <ul class="token-points">
+                <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Kode tidak disimpan di browser pada mode pratinjau.</span></li>
+                <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Validasi sebenarnya dilakukan server setelah integrasi sesi web tersedia.</span></li>
+                <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Jika kode hilang atau sudah dipakai, minta kode baru ke petugas.</span></li>
+              </ul>
+            </aside>
+          </div>
+        </div>
       </div>
 
       <div id="preview-root" hidden></div>
@@ -303,6 +425,8 @@
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
+  <script src="/config.js"></script>
+  <script src="/portal-app.js" defer></script>
   <script src="/portal.js" defer></script>
 </body>
 </html>

@@ -1,11 +1,11 @@
 {
-  "id": "/portal.html",
+  "id": "/pasien.html",
   "name": "Dinar-TB Portal Pasien",
   "short_name": "Dinar-TB",
-  "description": "Portal pasien Dinar-TB untuk panduan pengobatan, pemasangan aplikasi, dan informasi keamanan data tuberkulosis.",
+  "description": "Portal pasien Dinar-TB untuk jadwal pengobatan, konfirmasi obat, dan pengingat Web Push.",
   "lang": "id",
   "dir": "ltr",
-  "start_url": "/portal.html",
+  "start_url": "/pasien.html?app=1",
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait-primary",
@@ -36,7 +36,7 @@
     {
       "name": "Portal Pasien",
       "short_name": "Portal",
-      "url": "/portal.html",
+      "url": "/pasien.html",
       "icons": [
         {
           "src": "/portal-icons/icon-192.png",

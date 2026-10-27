@@ -15,5 +15,6 @@ import { PatientDeviceDataService } from './patient-device-data.service';
   imports: [AuthModule, SettingsModule, TypeOrmModule.forFeature([ActivationCode, Patient, PatientDevice, TreatmentCourse])],
   controllers: [ActivationController, PatientDeviceController],
   providers: [ActivationService, PatientDeviceDataService],
+  exports: [PatientDeviceDataService],
 })
 export class ActivationModule {}

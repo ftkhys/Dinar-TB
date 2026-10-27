@@ -28,7 +28,8 @@
     "staff:create:prod": "node dist/auth/create-staff.js",
     "staff:bootstrap-admin": "ts-node src/auth/bootstrap-admin.ts",
     "staff:bootstrap-admin:prod": "node dist/auth/bootstrap-admin.js",
-    "db:backfill-treatment-history": "ts-node src/database/backfill-treatment-history.ts"
+    "db:backfill-treatment-history": "ts-node src/database/backfill-treatment-history.ts",
+    "webpush:generate-keys": "node scripts/generate-vapid-keys.js"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.11",
@@ -36,14 +37,16 @@
     "@nestjs/core": "^11.0.11",
     "@nestjs/event-emitter": "^3.1.0",
     "@nestjs/platform-express": "^11.0.11",
+    "@nestjs/schedule": "^12.0.2",
     "@nestjs/typeorm": "^11.0.0",
     "dotenv": "^17.4.2",
     "exceljs": "^4.4.0",
-    "firebase-admin": "^12.5.0",
+    "firebase-admin": "^13.10.0",
     "pg": "^8.13.3",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1",
-    "typeorm": "^0.3.20"
+    "typeorm": "^0.3.20",
+    "web-push": "^3.6.7"
   },
   "devDependencies": {
     "@nestjs/cli": "^11.0.5",
@@ -52,10 +55,14 @@
     "@types/express": "^5.0.0",
     "@types/jest": "^29.5.14",
     "@types/node": "^22.13.4",
+    "@types/web-push": "^3.6.4",
     "jest": "^29.7.0",
     "prettier": "^3.5.0",
     "ts-jest": "^29.2.5",
     "ts-node": "^10.9.2",
     "typescript": "~5.7.3"
+  },
+  "overrides": {
+    "multer": "2.5.0"
   }
 }

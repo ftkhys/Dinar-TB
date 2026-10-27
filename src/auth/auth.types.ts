@@ -24,6 +24,17 @@ export type DevicePrincipal = { kind: 'patient_device'; id: string; patientId: s
 export type AuthPrincipal = StaffPrincipal | DevicePrincipal;
 export type AuthenticatedRequest = Request & { user: AuthPrincipal };
 
+/** Browser session principal. Never returned by the staff/device JWT auth. */
+export type WebSessionPrincipal = {
+  kind: 'patient_web';
+  /** `patient_web_sessions.id`, used for logout and push ownership. */
+  id: string;
+  patientId: string;
+  patient: { id: string; fullName: string; registerNumber: string };
+  expiresAt: Date;
+};
+export type WebAuthenticatedRequest = Request & { webSession: WebSessionPrincipal };
+
 export interface TokenClaims {
   sub: string;
   kind: 'staff' | 'patient_device';
